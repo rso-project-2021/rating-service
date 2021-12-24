@@ -7,35 +7,35 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type StationController struct{}
+type RatingController struct{}
 
-type getStationRequest struct {
+type getRatingRequest struct {
 	ID int64 `uri:"id" binding:"required,min=1"`
 }
 
-type getStationListRequest struct {
+type getRatingListRequest struct {
 	Offset int32 `form:"offset"`
 	Limit  int32 `form:"limit" binding:"required,min=1,max=20"`
 }
 
-type createStationRequest struct {
-	Name      string  `json:"name" db:"name"`
-	Latitude  float32 `json:"lat" db:"lat"`
-	Longitude float32 `json:"lng" db:"lng"`
-	Provider  string  `json:"provider" db:"provider"`
+type createRatingRequest struct {
+	Station_id int64  `json:"station_id" db:"station_id"`
+	User_id    int64  `json:"user_id" db:"user_id"`
+	Rating     int64  `json:"rating" db:"rating"`
+	Comment    string `json:"comment" db:"comment"`
 }
 
-type updateStationRequest struct {
-	Name      string  `json:"name" db:"name"`
-	Latitude  float32 `json:"lat" db:"lat"`
-	Longitude float32 `json:"lng" db:"lng"`
-	Provider  string  `json:"provider" db:"provider"`
+type updateRatingRequest struct {
+	Station_id int64  `json:"station_id" db:"station_id"`
+	User_id    int64  `json:"user_id" db:"user_id"`
+	Rating     int64  `json:"rating" db:"rating"`
+	Comment    string `json:"comment" db:"comment"`
 }
 
 func (server *Server) GetByID(ctx *gin.Context) {
 
 	// Check if request has ID field in URI.
-	var req getStationRequest
+	var req getRatingRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err})
 		ctx.Abort()
@@ -56,14 +56,14 @@ func (server *Server) GetByID(ctx *gin.Context) {
 func (server *Server) GetAll(ctx *gin.Context) {
 
 	// Check if request has parameters offset and limit for pagination.
-	var req getStationListRequest
+	var req getRatingListRequest
 	if err := ctx.ShouldBindQuery(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err})
 		ctx.Abort()
 		return
 	}
 
-	arg := db.ListStationsParam{
+	arg := db.ListRatingParam{
 		Offset: req.Offset,
 		Limit:  req.Limit,
 	}
@@ -82,18 +82,18 @@ func (server *Server) GetAll(ctx *gin.Context) {
 func (server *Server) Create(ctx *gin.Context) {
 
 	// Check if request has all required fields in json body.
-	var req createStationRequest
+	var req createRatingRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err})
 		ctx.Abort()
 		return
 	}
 
-	arg := db.CreateStationParam{
-		Name:      req.Name,
-		Latitude:  req.Latitude,
-		Longitude: req.Longitude,
-		Provider:  req.Provider,
+	arg := db.CreateRatingParam{
+		Station_id: req.Station_id,
+		User_id:    req.User_id,
+		Rating:     req.Rating,
+		Comment:    req.Comment,
 	}
 
 	// Execute query.
@@ -110,7 +110,7 @@ func (server *Server) Create(ctx *gin.Context) {
 func (server *Server) Update(ctx *gin.Context) {
 
 	// Check if request has ID field in URI.
-	var reqID getStationRequest
+	var reqID getRatingRequest
 	if err := ctx.ShouldBindUri(&reqID); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err})
 		ctx.Abort()
@@ -118,18 +118,18 @@ func (server *Server) Update(ctx *gin.Context) {
 	}
 
 	// Check if request has all required fields in json body.
-	var req updateStationRequest
+	var req updateRatingRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err})
 		ctx.Abort()
 		return
 	}
 
-	arg := db.UpdateStationParam{
-		Name:      req.Name,
-		Latitude:  req.Latitude,
-		Longitude: req.Longitude,
-		Provider:  req.Provider,
+	arg := db.UpdateRatingParam{
+		Station_id: req.Station_id,
+		User_id:    req.User_id,
+		Rating:     req.Rating,
+		Comment:    req.Comment,
 	}
 
 	// Execute query.
@@ -146,7 +146,7 @@ func (server *Server) Update(ctx *gin.Context) {
 func (server *Server) Delete(ctx *gin.Context) {
 
 	// Check if request has ID field in URI.
-	var req getStationRequest
+	var req getRatingRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err})
 		ctx.Abort()

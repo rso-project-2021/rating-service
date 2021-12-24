@@ -27,11 +27,11 @@ func NewServer(config config.Config, store *db.Store) (*Server, error) {
 	// Setup routing for server.
 	v1 := router.Group("v1")
 	{
-		v1.GET("/stations/:id", server.GetByID)
-		v1.GET("/stations", server.GetAll)
-		v1.POST("/stations", server.Create)
-		v1.PUT("/stations/:id", server.Update)
-		v1.DELETE("/stations/:id", server.Delete)
+		v1.GET("/ratings/:id", server.GetByID)
+		v1.GET("/ratings", server.GetAll)
+		v1.POST("/ratings", server.Create)
+		v1.PUT("/ratings/:id", server.Update)
+		v1.DELETE("/ratings/:id", server.Delete)
 	}
 
 	// Setup health check routes.
