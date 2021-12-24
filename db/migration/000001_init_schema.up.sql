@@ -1,7 +1,8 @@
-CREATE TABLE "stations" (
-    "station_id"    BIGSERIAL PRIMARY KEY,
-    "name"          VARCHAR(40) NOT NULL,
-    "lat"           DECIMAL NOT NULL,
-    "lng"           DECIMAL NOT NULL,
-    "provider"      VARCHAR(40) NOT NULL
+CREATE TABLE "ratings" (
+    "rating_id"     BIGSERIAL PRIMARY KEY,
+    "station_id"    INT NOT NULL,
+    "user_id"       INT NOT NULL,
+    "rating"        INT NOT NULL,
+    "comment"       VARCHAR(256),
+    "created_at"    TIMESTAMP NOT NULL DEFAULT(now())
 );
