@@ -77,6 +77,7 @@ func TestListRatings(t *testing.T) {
 }
 
 func TestUpdateRating(t *testing.T) {
+
 	rating1 := createRandomRating(t)
 
 	arg := UpdateRatingParam{
@@ -92,11 +93,12 @@ func TestUpdateRating(t *testing.T) {
 	require.NotEmpty(t, rating2)
 
 	require.Equal(t, rating1.ID, rating2.ID)
-	require.Equal(t, rating1.Station_id, rating2.Station_id)
-	require.Equal(t, rating1.User_id, rating2.User_id)
-	require.Equal(t, rating1.Rating, rating2.Rating)
-	require.Equal(t, rating1.Comment, rating2.Comment)
+	require.Equal(t, arg.Station_id, rating2.Station_id)
+	require.Equal(t, arg.User_id, rating2.User_id)
+	require.Equal(t, arg.Rating, rating2.Rating)
+	require.Equal(t, arg.Comment, rating2.Comment)
 	require.Equal(t, rating1.CreatedAt, rating2.CreatedAt)
+
 }
 
 func TestDeleteRating(t *testing.T) {
