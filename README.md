@@ -29,5 +29,6 @@ Populate database with some ratings and comments. You can run this query in [Tab
 ```sql
 INSERT INTO ratings("station_id", "user_id", "rating", "comment")
 VALUES 	(1, 21, 3, 'Povprečna polnilnica. Težave pri parkiranju.'),
-	(2, 4, 5, 'Nevrjetn dobr! :)');
+        (1, 2, 4, 'Dost dobr.'),
+	    (2, 4, 5, 'Nevrjetn dobr! :)');
 ```

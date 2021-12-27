@@ -105,3 +105,11 @@ func (store *Store) Delete(ctx context.Context, id int64) error {
 
 	return err
 }
+
+func (store *Store) GetAllByStation(ctx context.Context, stationID int64) (ratings []Rating, err error) {
+	const query = `SELECT * FROM "ratings" WHERE "station_id" = $1`
+	ratings = []Rating{}
+	err = store.db.SelectContext(ctx, &ratings, query, stationID)
+
+	return
+}
