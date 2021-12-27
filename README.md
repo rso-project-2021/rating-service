@@ -4,12 +4,11 @@
 Microservice used for working with user's ratings and comments data.
 
 ## Environment file
-In root of your local repository add `app.env` file.
 In root of your local repository add `config.json` file.
 ```
 {
     "db_driver" : "postgres",
-    "db_source": "postgres://root:secret@localhost:5432/rating_service?sslmode=disable",
+    "db_source": "postgres://root:secret@localhost:5432/electric_station?sslmode=disable",
     "server_address": "0.0.0.0:8080",
     "gin_mode": "debug"
 }
@@ -32,19 +31,3 @@ INSERT INTO ratings("station_id", "user_id", "rating", "comment")
 VALUES 	(1, 21, 3, 'Povprečna polnilnica. Težave pri parkiranju.'),
 	(2, 4, 5, 'Nevrjetn dobr! :)');
 ```
-
-## Things to implement
-- [x] CRUD operations
-- [x] Database migrations
-- [x] CRUD unit tests
-- [x] Makefile
-- [x] Health checks
-- [x] Docker file
-- [x] CI github actions
-- [x] Dockerhub
-- [x] AWS account
-- [x] Kubernetes cluster in AWS
-- [x] Metrics ([Prometheus in Go](https://prometheus.io/docs/guides/go-application/))
-- [x] CD github actions
-- [ ] Config server (dynamic configuration)
-- [ ] API unit tests
