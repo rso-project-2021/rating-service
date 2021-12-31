@@ -1,0 +1,281 @@
+basePath: /
+definitions:
+  db.CreateRatingParam:
+    properties:
+      comment:
+        type: string
+      rating:
+        type: integer
+      station_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  db.Empty:
+    type: object
+  db.HTTPError400:
+    properties:
+      message:
+        items:
+          $ref: '#/definitions/db.Empty'
+        type: array
+    type: object
+  db.HTTPError404:
+    properties:
+      message:
+        $ref: '#/definitions/db.Empty'
+    type: object
+  db.HTTPError500:
+    properties:
+      message:
+        $ref: '#/definitions/db.Empty'
+    type: object
+  db.Rating:
+    properties:
+      comment:
+        type: string
+      created_at:
+        type: string
+      rating:
+        type: integer
+      rating_id:
+        type: integer
+      station_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  db.UpdateRatingParam:
+    properties:
+      comment:
+        type: string
+      rating:
+        type: integer
+      station_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is an API for ratings and comments.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: rating-service API
+  version: "1.0"
+paths:
+  /ratings:
+    get:
+      consumes:
+      - multipart/form-data
+      description: get all ratings
+      operationId: get-all-ratings
+      parameters:
+      - description: Offset
+        in: query
+        name: offset
+        required: true
+        type: integer
+      - description: Limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            BasicHeader:
+              type: object
+          schema:
+            items:
+              $ref: '#/definitions/db.Rating'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/db.HTTPError400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/db.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/db.HTTPError500'
+      summary: Get all ratings and comments
+      tags:
+      - ratings
+    post:
+      consumes:
+      - application/json
+      description: create rating
+      operationId: create-rating
+      parameters:
+      - description: Rating parametres
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/db.CreateRatingParam'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/db.Rating'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/db.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/db.HTTPError500'
+      summary: Create a new rating
+      tags:
+      - ratings
+  /ratings/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete rating
+      operationId: delete-rating
+      parameters:
+      - description: Rating ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ""
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/db.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/db.HTTPError500'
+      summary: Delete a rating
+      tags:
+      - ratings
+    get:
+      consumes:
+      - application/json
+      description: get rating by ID
+      operationId: get-rating-by-int
+      parameters:
+      - description: Rating ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/db.Rating'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/db.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/db.HTTPError500'
+      summary: Get a rating by its ID
+      tags:
+      - ratings
+    put:
+      consumes:
+      - application/json
+      description: update rating
+      operationId: update-rating
+      parameters:
+      - description: Rating ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Rating parametres
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/db.UpdateRatingParam'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/db.Rating'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/db.HTTPError400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/db.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/db.HTTPError500'
+      summary: Update a rating
+      tags:
+      - ratings
+  /ratings/station/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get rating by station
+      operationId: get-rating-by-station
+      parameters:
+      - description: ID of station
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/db.Rating'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/db.HTTPError400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/db.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/db.HTTPError500'
+      summary: Get all ratings of a single station by its ID
+      tags:
+      - ratings
+schemes:
+- http
+swagger: "2.0"

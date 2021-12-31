@@ -4,8 +4,12 @@ import (
 	"rating-service/config"
 	"rating-service/db"
 
+	"rating-service/docs"
+
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Server struct {
@@ -49,6 +53,13 @@ func NewServer(config config.Config, store *db.Store) (*Server, error) {
 			handler := promhttp.Handler()
 			handler.ServeHTTP(ctx.Writer, ctx.Request)
 		})
+	}
+
+	// Open api 2.0
+	docs.SwaggerInfo.BasePath = "/v1"
+	swagger := router.Group("openapi")
+	{
+		swagger.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	}
 
 	server.router = router

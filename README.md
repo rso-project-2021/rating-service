@@ -33,3 +33,6 @@ VALUES 	(1, 21, 3, 'Povprečna polnilnica. Težave pri parkiranju.'),
         (1, 2, 4, 'Bil ponovno, še vedno dobra.'),
 	    (2, 4, 5, 'Nevrjetn dobr! :)');
 ```
+
+## Swagger
+Swagger 2.0 UI is accesible on [http://localhost:8080/openapi/index.html](http://localhost:8080/openapi/index.html).
