@@ -55,7 +55,7 @@ func NewServer(config config.Config, store *db.Store) (*Server, error) {
 		})
 	}
 
-	// Open api 2.0
+	// Open api 2.0.
 	docs.SwaggerInfo.BasePath = "/v1"
 	swagger := router.Group("openapi")
 	{

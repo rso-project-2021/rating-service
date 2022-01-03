@@ -1,8 +1,6 @@
 package config
 
 import (
-	"log"
-
 	"github.com/spf13/viper"
 )
 
@@ -25,9 +23,7 @@ func New(path string) (config Config, err error) {
 		return
 	}
 
-	// Some small change
 	err = viper.Unmarshal(&config)
 
-	log.Println(config.GinMode)
 	return
 }
