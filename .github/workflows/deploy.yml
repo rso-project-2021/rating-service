@@ -17,7 +17,7 @@ jobs:
     - name: Create config.json file
       run: |
         touch config.json
-        echo '{"db_driver":"postgres","db_source":"${{ secrets.PROD_DB_CONNECTION }}","server_address":"0.0.0.0:8080","gin_mode":"debug"}' >> config.json
+        echo '{"host_address":"http://ace03ade1153a4bd59aa84c1a4634cfa-fdd5140b477a39e3.elb.eu-central-1.amazonaws.com/rating-service/","db_driver":"postgres","db_source":"${{ secrets.PROD_DB_CONNECTION }}","server_address":"0.0.0.0:8080","gin_mode":"debug"}' >> config.json
         cat config.json
     # Publish image to Docker Hub.
     - name: Set up Docker Buildx

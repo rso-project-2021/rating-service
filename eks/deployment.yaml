@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: rating-service
-        image: 092356264921.dkr.ecr.eu-central-1.amazonaws.com/rating-service:14131e5790932e41de010a4082bf91cbe5d697b3
+        image: 092356264921.dkr.ecr.eu-central-1.amazonaws.com/rating-service:9ad7d53541a3e6997af896154c1e7e5ecf5c4f5b
         ports:
         - containerPort: 8080

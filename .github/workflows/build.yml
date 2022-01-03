@@ -51,7 +51,7 @@ jobs:
     - name: Create config file
       run: |
         touch config.json
-        echo '{"db_driver":"postgres","db_source":"postgres://root:secret@localhost:5432/electric_station?sslmode=disable","server_address":"0.0.0.0:8080","gin_mode":"debug"}' >> config.json
+        echo '{"host_address":"localhost:8080","db_driver":"postgres","db_source":"postgres://root:secret@localhost:5432/electric_station?sslmode=disable","server_address":"0.0.0.0:8080","gin_mode":"debug"}' >> config.json
         cat config.json
     - name: Test
       run: make test

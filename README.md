@@ -7,6 +7,7 @@ Microservice used for working with user's ratings and comments data.
 In root of your local repository add `config.json` file.
 ```
 {
+    "host_address" : "localhost:8080",
     "db_driver" : "postgres",
     "db_source": "postgres://root:secret@localhost:5432/electric_station?sslmode=disable",
     "server_address": "0.0.0.0:8080",

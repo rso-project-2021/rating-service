@@ -57,6 +57,7 @@ func NewServer(config config.Config, store *db.Store) (*Server, error) {
 
 	// Open api 2.0.
 	docs.SwaggerInfo.BasePath = "/v1"
+	docs.SwaggerInfo.Host = config.HostAddress
 	swagger := router.Group("openapi")
 	{
 		swagger.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
